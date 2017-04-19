@@ -1,67 +1,70 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 public class MainScreen
 {
-	private JPanel panel;
 	private JFrame frame; 
-	private JLabel rules1;
-	private JLabel rules2;
-	private JLabel rules3;
-	private JLabel welcome;
-	private JLabel bestPlayer;
-	private JButton close; 
+	Draw y=new Draw();
 	MainScreen()
 	{
 		frame=new JFrame("Connect");
-		close=new JButton("Let's Go!");
-		welcome=new JLabel("WELCOME TO CONNECT!");
-		rules1=new JLabel("To win: Connect respective number of pieces in a row, column or diagonally ");
-		rules2=new JLabel("You will be playing against the computer.");
-		rules3=new JLabel("You will be Player 1");
-		bestPlayer=new JLabel("May the best player win!");
-		Font f1=new Font("Arial",Font.PLAIN, 20);
-		Font f2=new Font("Arial",Font.BOLD, 30);
-		welcome.setForeground(Color.BLUE);
-		welcome.setFont(f2);
-		bestPlayer.setForeground(Color.BLUE);
-		bestPlayer.setFont(f2);
-		rules1.setFont(f1);
-		rules2.setFont(f1);
-		rules3.setFont(f1);
-		close.setFont(f1);
-		close.setBackground(Color.white);
-		welcome.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		bestPlayer.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		rules1.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		rules2.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		rules3.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		close.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		panel=new JPanel();
-		panel.setForeground(Color.yellow);
-		panel.setBackground(Color.yellow);
-		panel.setBorder(BorderFactory.createEmptyBorder(10, 55, 10, 55));
-		rules_frame.setContentPane(panel);
-		rules_frame.add(welcome);
-		rules_frame.add(rules1);
-		rules_frame.add(rules2);
-		rules_frame.add(rules3);
-		rules_frame.add(bestPlayer);
-		rules_frame.add(close);
-		rules_frame.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		rules_frame.pack();
-		rules_frame.setLocationRelativeTo(null);
-		rules_frame.setVisible(true);
+		Font f1=new Font("Arial",Font.BOLD, 30);
+		frame.setContentPane(y);
+		y.setForeground(new Color(160,205,230));
+		y.setBackground(new Color(160,205,230));
+		y.setValues(new int[9][7]);	
+		frame.pack();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 	
 	public static void main(String[] args) 
 	{
 		MainScreen x=new MainScreen();
+	}
+	class Draw extends JPanel
+	{
+		private int values[][];
+		public void setValues(int a[][])
+		{
+			values=a;
+		}
+		public int[][] getValues()
+		{
+			return values;
+		}
+		public void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+			g.setColor(new Color(12,95,155));
+			int rows=getValues().length;
+			int cols=getValues()[0].length;
+			System.out.println(rows+"    "+cols);
+			g.setFont(new Font("Arial",Font.BOLD, 30));
+			g.drawString("Connect",725, 50);
+			g.drawRect((1850-rows*100)/2 -1, 99, rows*70+1, cols*70+1);
+			g.setColor(Color.yellow);
+			g.fillRect((1850-rows*100)/2, 100, rows*70, cols*70);
+			for(int i=((1850-rows*100)/2)+25;i<=rows*70;i+=70)
+			{
+				for(int j=125;j<=cols*70;j+=70)
+				{ 
+					g.setColor(new Color(12,95,155));
+					g.drawOval(i-2, j-2, 53, 53);
+					g.setColor(Color.white);
+					g.fillOval(i, j, 50, 50);
+				}
+			}
+		}
 	}
 }
