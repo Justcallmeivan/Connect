@@ -7,16 +7,20 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-public class MainScreen
+public class MainScreen implements MouseListener
 {
 	private JFrame frame; 
 	private Shape[][] circleGrid;
+	private Shape[] rectGrid;
 	Draw y=new Draw();
 	int rows;
 	int cols;
@@ -27,13 +31,17 @@ public class MainScreen
 		frame.setContentPane(y);
 		y.setForeground(new Color(160,205,230));
 		y.setBackground(new Color(160,205,230));
-		setValues(new int[10][8]);	
+		setValues(new int[8][10]);	
 
 		rows=getValues().length;
 		cols=getValues()[0].length;
+		rectGrid=new Shape[cols];
 		circleGrid = new Shape[rows][cols];
 		int ovalStart1=(1850-rows*100)/2 +13;
 		int ovalStart2=110;
+		int rectStart1=(1850-rows*100)/2;
+		int rectStart2=100;
+		int rectHeight=rows*70;
 		for(int i=0;i<cols;i++)
 		{
 			for(int j=0;j<rows;j++)
@@ -44,15 +52,19 @@ public class MainScreen
 			ovalStart2+=70;
 			ovalStart1-=(70*rows);
 		}
-		
+		for(int a=0;a<cols;a++)
+		{
+			rectGrid[a]=new Rectangle2D.Double(rectStart1,rectStart2,70,rectHeight);
+			rectStart1+=70;
+		}
+/////		System.out.println(rectGrid[0].contains(((1850-rows*100)/2)+210,100,70,560));
+		frame.addMouseListener(this);
 		frame.pack();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
-	
 	private int values[][];
 	public void setValues(int a[][])
 	{
@@ -97,6 +109,14 @@ public class MainScreen
 				ovalStart1-=(70*rows);
 			}
 		}
-		//public void setArray(int )
 	}
+
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
+
 }
