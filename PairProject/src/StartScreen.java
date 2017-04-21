@@ -5,12 +5,14 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-public class StartScreen
+public class StartScreen implements ActionListener 
 {
 	private JPanel panel;
 	private JFrame rules_frame; 
@@ -26,8 +28,14 @@ public class StartScreen
 	{
 		rules_frame=new JFrame("Rules");
 		connect3=new JButton("Connect-3");
+		connect3.addActionListener(this);
+		connect3.setActionCommand("connect-3");
 		connect4=new JButton("Connect-4");
+		connect4.addActionListener(this);
+		connect4.setActionCommand("connect-4");
 		connect5=new JButton("Connect-5");
+		connect5.addActionListener(this);
+		connect5.setActionCommand("connect-5");
 		welcome=new JLabel("WELCOME TO CONNECT!");
 		rules1=new JLabel("To win: Connect respective number of pieces in a row, column or diagonally ");
 		rules2=new JLabel("You will be playing against the computer.");
@@ -79,5 +87,20 @@ public class StartScreen
 	public static void main(String[] args) 
 	{
 		StartScreen x=new StartScreen();
+	}
+	public void actionPerformed(ActionEvent evt) {
+		rules_frame.setVisible(false);
+		if(evt.getActionCommand() == "connect-3")
+		{
+			MainScreen x=new MainScreen(new int[6][5]);	
+		}
+		if(evt.getActionCommand() == "connect-4")
+		{
+			MainScreen x=new MainScreen(new int[7][6]);	
+		}
+		if(evt.getActionCommand() == "connect-5")
+		{
+			MainScreen x=new MainScreen(new int[8][7]);	
+		}
 	}
 }

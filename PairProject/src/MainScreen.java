@@ -24,17 +24,15 @@ public class MainScreen implements MouseListener
 	Draw y=new Draw();
 	int rows;
 	int cols;
-	MainScreen()
+	MainScreen(int[][] values)
 	{
 		frame=new JFrame("Connect");
 		Font f1=new Font("Arial",Font.BOLD, 30);
 		frame.setContentPane(y);
 		y.setForeground(new Color(160,205,230));
 		y.setBackground(new Color(160,205,230));
-		setValues(new int[8][10]);	
-
-		rows=getValues().length;
-		cols=getValues()[0].length;
+		rows=values.length;
+		cols=values[0].length;
 		rectGrid=new Shape[cols];
 		circleGrid = new Shape[rows][cols];
 		int ovalStart1=(1850-rows*100)/2 +13;
@@ -57,7 +55,6 @@ public class MainScreen implements MouseListener
 			rectGrid[a]=new Rectangle2D.Double(rectStart1,rectStart2,70,rectHeight);
 			rectStart1+=70;
 		}
-/////		System.out.println(rectGrid[0].contains(((1850-rows*100)/2)+210,100,70,560));
 		frame.addMouseListener(this);
 		frame.pack();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -65,20 +62,7 @@ public class MainScreen implements MouseListener
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	private int values[][];
-	public void setValues(int a[][])
-	{
-		values=a;
-	}
-	public int[][] getValues()
-	{
-		return values;
-	}
-	public static void main(String[] args) 
-	{
-		MainScreen x=new MainScreen();
-	}
-	
+
 	class Draw extends JPanel
 	{
 
