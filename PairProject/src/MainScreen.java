@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,9 +36,9 @@ public class MainScreen implements MouseListener
 		cols=values[0].length;
 		rectGrid=new Shape[cols];
 		circleGrid = new Shape[rows][cols];
-		int ovalStart1=(1850-rows*100)/2 +13;
+		int ovalStart1=313;
 		int ovalStart2=110;
-		int rectStart1=(1850-rows*100)/2;
+		int rectStart1=300;
 		int rectStart2=100;
 		int rectHeight=rows*70;
 		for(int i=0;i<cols;i++)
@@ -57,28 +58,33 @@ public class MainScreen implements MouseListener
 		}
 		frame.addMouseListener(this);
 		frame.pack();
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setSize(new Dimension(1000,1000)); 
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
 
 	class Draw extends JPanel
 	{
-
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
 			g.setColor(new Color(12,95,155));
-
 			System.out.println(rows+"    "+cols);
 			g.setFont(new Font("Arial",Font.BOLD, 30));
-			g.drawString("Connect",700, 50);
-			g.drawRect((1850-rows*100)/2 -1, 99, rows*70+1, cols*70+1);
+			g.drawString("Connect",465, 50);
+			g.drawRect(300, 99, rows*70+1, cols*70+1);
 			g.setColor(Color.yellow);
-			g.fillRect((1850-rows*100)/2, 100, rows*70, cols*70);
-			int ovalStart1=(1850-rows*100)/2 +13;
+			g.fillRect(300, 100, rows*70, cols*70);
+			int ovalStart1=313;
 			int ovalStart2=110;
+			g.setColor(Color.red);
+			g.drawOval(150, 75, 60, 60);
+			g.fillOval(150, 75, 60, 60);
+			g.setColor(Color.black);
+			g.drawOval(850, 75, 60, 60);
+			g.fillOval(850, 75, 60, 60);
 			for(int i=0;i<cols;i++)
 			{
 				for(int j=0;j<rows;j++)
